@@ -42,7 +42,7 @@ class SEO_Autoptimiser {
         $fields = [
             'ai_provider' => 'AI Provider',
             'gemini_api_key' => 'Gemini API Key (free tier available)',
-            'gemini_model' => 'Gemini Model (example: gemini-2.0-flash)',
+            'gemini_model' => 'Gemini Model (example: gemini-1.5-flash)',
             'seo_rules' => 'SEO Rules (one per line)',
             'company_information' => 'Company Information / Brand Voice',
             'auto_apply' => 'Auto-apply optimized content',
@@ -77,7 +77,7 @@ class SEO_Autoptimiser {
         return [
             'ai_provider' => 'gemini',
             'gemini_api_key' => '',
-            'gemini_model' => 'gemini-2.0-flash',
+            'gemini_model' => 'gemini-1.5-flash',
             'seo_rules' => "Use one H1 only\nUse clear H2/H3 hierarchy\nAvoid keyword stuffing",
             'company_information' => '',
             'auto_apply' => 0,
@@ -256,10 +256,7 @@ class SEO_Autoptimiser {
         if (is_wp_error($request)) return $request;
         $status = wp_remote_retrieve_response_code($request);
         $payload = json_decode(wp_remote_retrieve_body($request), true);
-        if ($status < 200 || $status >= 300) {
-            $err = $payload['error']['message'] ?? ($payload['error']['status'] ?? 'Gemini API request failed.');
-            return new WP_Error('gemini_error', 'Gemini API error: ' . sanitize_text_field($err));
-        }
+        if ($status < 200 || $status >= 300) return new WP_Error('gemini_error', 'Gemini API request failed.');
         $json_text = $payload['candidates'][0]['content']['parts'][0]['text'] ?? '';
         $data = json_decode($json_text, true);
         if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) return new WP_Error('invalid_json', 'Could not parse AI response JSON.');
