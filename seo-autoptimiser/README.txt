@@ -4,31 +4,29 @@ Tags: seo, ai, elementor, content optimization
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 
 AI-powered SEO optimization plugin for WordPress + Elementor.
 
 == Description ==
 SEO AUTOPTIMISER helps you:
-- Analyze your post/page content.
-- Extract target keywords automatically.
-- Generate SEO-friendly improved content and meta description.
-- Optionally auto-apply changes to post title/content.
-- Run hourly automated optimization jobs.
-
-Important:
-OpenAI does not provide an unlimited "free API key". You must use your own API key and manage usage in your OpenAI account.
+- Use Gemini API (free-tier supported) for SEO optimization.
+- Add custom SEO rules and company context from plugin settings.
+- Analyze post/page + Elementor text nodes.
+- Show text-change suggestions with reasons.
+- Use Elementor floating button/panel for manual replacement workflow.
 
 == Installation ==
-1. Zip the folder `seo-autoptimiser`.
-2. In WordPress admin: Plugins > Add New > Upload Plugin.
-3. Upload the ZIP and activate.
-4. Go to Settings > SEO AUTOPTIMISER and add your OpenAI API key.
+1. Keep folder as `seo-autoptimiser`.
+2. Zip it locally and upload from WordPress admin.
+3. Activate plugin.
+4. Go to Settings > SEO AUTOPTIMISER and set Gemini API key.
 
-== FAQ ==
-= Does this support Elementor? =
-Yes. Elementor content is stored in post content/meta and this plugin optimizes the WordPress post/page body used by Elementor pages.
-
-= Is it 100% automatic? =
-Yes, if you enable Auto-apply + Optimize on save + scheduled automation.
+== Elementor workflow ==
+When editing with Elementor, click the floating "SEO Optimize" button.
+A right-side suggestion panel opens with:
+- optimized title
+- keywords/meta description
+- highlighted text suggestions (current vs suggested)
+You can copy and replace manually if direct auto-edit is not suitable.
